@@ -28,15 +28,83 @@ function render(variables = {}) {
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
+  let name = variables.name;
+  if (variables.name == null) name = "";
+  let lastName = variables.lastName;
+  if (variables.lastName == null) lastName = "";
+  let position = variables.socialMediaPosition;
+  if (variables.socialMediaPosition === "position-right") {
+    position = "position-right";
+  } else {
+    position = "position-left";
+  }
+  let job = variables.role;
+  if (
+    variables.role != null &&
+    variables.role != "Web Developer" &&
+    variables.role != "Floor Planner"
+  ) {
+    job = "Technical Writter";
+  } else if (variables.role != null && variables.role != "Web Developer") {
+    job = "Floor Planner";
+  } else if (variables.role != null) {
+    job = "Web Developer";
+  } else {
+    job = "No trabaja";
+  }
+
+  let location = variables.city;
+  if (
+    variables.city != null &&
+    variables.city != "Miami" &&
+    variables.city != "Munich" &&
+    variables.city != "Caracas"
+  ) {
+    location = "Toronto";
+  } else if (
+    variables.city != null &&
+    variables.city != "Miami" &&
+    variables.city != "Munich"
+  ) {
+    location = "Caracas";
+  } else if (variables.city != null && variables.city != "Miami") {
+    location = "Munich";
+  } else if (variables.city != null) {
+    location = "Miami";
+  } else {
+    location = "Fuera de la tierra";
+  }
+
+  let republic = variables.country;
+  if (
+    variables.country != null &&
+    variables.country != "USA" &&
+    variables.country != "Germany" &&
+    variables.country != "Canada"
+  ) {
+    republic = "Venezuela";
+  } else if (
+    variables.country != null &&
+    variables.country != "USA" &&
+    variables.country != "Germany"
+  ) {
+    republic = "Canada";
+  } else if (variables.country != null && variables.country != "USA") {
+    republic = "Germany";
+  } else if (variables.country != null) {
+    republic = "USA";
+  } else {
+    republic = "Apatrida, Nomada libre";
+  }
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>${variables.name}Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
+          <h1>${name} ${lastName}</h1>
+          <h2>${job}</h2>
+          <h3>${location}, ${republic}</h3>
+          <ul class="${position}">
             <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
             <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
             <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
